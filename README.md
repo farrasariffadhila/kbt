@@ -26,6 +26,9 @@ php artisan key:generate
 php artisan serve
 ```
 ```bash
+npm install
+```
+```bash
 # kalo ada error tentang database.sqllite nggak kedeteksi bisa
 # bikin file kosong di database/database.sqlite, terus run:
 php artisan migrate:fresh
