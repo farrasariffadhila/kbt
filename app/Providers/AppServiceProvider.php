@@ -22,3 +22,7 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 }
+class RouteServiceProvider extends ServiceProvider
+{
+    public const HOME = '/homepage';
+}
