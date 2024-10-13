@@ -9,19 +9,19 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::get('/homepage', function () {
     return view('product');
-})->name('homepage');
+})->middleware(['auth'])->name('homepage');
 
 Route::get('/products', function () {
     return view('products');
-})->name('products');
+})->middleware(['auth'])->name('products');
 
 Route::get('/product', function () {
     return view('product');
-});
+})->middleware(['auth'])->name('product');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
