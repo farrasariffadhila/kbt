@@ -39,7 +39,7 @@ class CategorySeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => $name = 'LoremIpsum',
+            'name' => $name = 'Console',
             'slug' => Str::slug($name),
             'color' => 'orange'
         ]);

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('price');
             $table->string('image_path');
             $table->double('star_rating');
-            $table->double('count_rating');
+            $table->integer('count_rating');
             $table->foreignId('user_id')->constrained( //seller
                 table: 'users',
                 indexName: 'products_user_id'

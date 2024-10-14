@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class ProductSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,8 +18,8 @@ class ProductSeeder extends Seeder
         User::factory(5)->create();
 
         User::create([
-            'name' => 'Billy jonathan',
-            'username' => 'bithan',
+            'name' => 'Tronic Store',
+            'username' => 'Tronic',
             'email' => 'tronic@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
