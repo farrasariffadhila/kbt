@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,20 +9,16 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['products' => Product::all()]);
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/homepage', function () {
-    return view('product');
-})->middleware(['auth'])->name('homepage');
+Route::get('/store', function () {
+    return view('store', ['products' => Product::all()]);
+})->middleware(['auth'])->name('store');
 
-Route::get('/products', function () {
-    return view('products');
-})->middleware(['auth'])->name('products');
-
-Route::get('/product', function () {
-    return view('product');
-})->middleware(['auth'])->name('product');
+Route::get('/categories', function () {
+    return view('categories');
+})->middleware(['auth'])->name('categories');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

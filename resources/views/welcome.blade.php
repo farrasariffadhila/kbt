@@ -31,9 +31,18 @@
                 font-weight: bold;
                 color: #1E90FF; /* Biru laut */
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-                margin-bottom: 20px;
                 font-family: 'Courier New', Courier, monospace; /* Gaya font unik */
                 letter-spacing: 5px;
+            }
+
+            .subtitle {
+                margin-bottom: 20px;
+                font-size: 18px;
+                font-weight: bold;
+                color: #0e13a7; /* Biru laut */
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                font-family: monospace;
+                letter-spacing: 1px;
             }
 
             .button-container {
@@ -45,7 +54,9 @@
                 display: inline-block;
                 padding: 15px 30px;
                 font-size: 18px;
-                color: white;
+                font-weight: 800;
+                font-family: 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                color: black;
                 background-color: transparent;
                 border: 2px solid #1E90FF; /* Warna biru laut */
                 border-radius: 10px;
@@ -62,6 +73,7 @@
     </head>
     <body>
         <div class="title">Tronic</div>
+        <div class="subtitle">Find the tech you need, at the price you want.</div>
         <div class="button-container">
             <a href="{{ route('login') }}">Log in</a>
             <a href="{{ route('register') }}">Register</a>
