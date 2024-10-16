@@ -4,6 +4,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +21,17 @@ Route::get('/store', function () {
 Route::get('/categories', function () {
     return view('categories');
 })->middleware(['auth'])->name('categories');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+ 
+    Route::delete('/cart/remove/{cartItem}', [CartController::class, 'removeItem'])->name('cart.remove');
+});
+
+Route::get('/update-cart-navbar', function () {
+    return view('partials.cart-navbar');
+})->name('cart.update-navbar');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

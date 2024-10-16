@@ -2,24 +2,65 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    /** @use HasFactory<\Database\Factories\CartsFactory> */
     use HasFactory;
+    protected $fillable = [
+        'user_id', 
+        'status', 
+        'total_items', 
+        'total_price',
+    ];
 
-    protected $with = ['user', 'product'];
-
-    public function user(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
-    
-    public function product(): BelongsTo
+
+    public function items()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function addItem($product, $quantity, $price)
+    {
+        // Check if the product already exists in the cart
+        $existingItem = $this->items()->where('product_id', $product)->first();
+    
+        if ($existingItem) {
+            // If the item exists, update the quantity and subtotal
+            $newQuantity = $existingItem->quantity + $quantity;
+            $existingItem->updateQuantity($newQuantity);
+            
+            return $existingItem;
+        } else {
+            // If the item does not exist, create a new cart item
+            $item = $this->items()->create([
+                'product_id' => $product,
+                'quantity' => $quantity,
+                'price' => $price,
+                'subtotal' => $quantity * $price,
+            ]);
+    
+            // Update the cart summary
+            $this->updateCartSummary();
+    
+            return $item;
+        }
+    }
+
+
+    public function updateCartSummary()
+    {
+        $totalItems = $this->items()->count();
+        $totalPrice = $this->items()->sum('subtotal');
+
+        $this->update([
+            'total_items' => $totalItems,
+            'total_price' => $totalPrice,
+        ]);
     }
 }
