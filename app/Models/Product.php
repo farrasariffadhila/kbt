@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,6 +21,8 @@ class Product extends Model
         'image_path',
     ];
 
+    protected $with = ['user', 'category'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -33,5 +36,26 @@ class Product extends Model
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class, 'category_id');
+    }
+
+    public function scopeFilter(Builder $query, array $filters): void 
+    {
+        $query->when(
+            $filters['search'] ?? false,
+            fn($query, $search) => 
+            $query->where('name', 'like', '%' . $search . '%')
+        );
+
+        $query->when(
+            $filters['category'] ?? false,
+            fn($query, $category) => 
+            $query->whereHas('category', fn($query) => $query->where('slug', $category))
+        );
+        
+        $query->when(
+            $filters['user'] ?? false,
+            fn($query, $user) => 
+            $query->whereHas('user', fn($query) => $query->where('username', $user))
+        );
     }
 }

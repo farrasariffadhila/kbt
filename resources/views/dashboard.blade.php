@@ -15,7 +15,7 @@
     <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
       <!-- Dashboard Products -->
       @forelse ($products as $product) 
-        <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div class=" max-h-fit rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
           <!-- Product's Photo -->
           <div class="h-56 w-full">
             <a href="#">
@@ -24,7 +24,7 @@
           </div>
 
           <!-- Product's Description -->
-          <div class="pt-3">
+          <div class="h-40 pt-3">
             <div class="mb-2 flex items-center justify-between gap-4">
               <span class="me-2 rounded bg-{{ $product->category->color }}-200 px-2.5 py-0.5 text-xs font-bold text-black-800 dark:bg-primary-900 dark:text-primary-300">
                 {{ $product->category->name }} 
@@ -44,9 +44,11 @@
               </div>
             </div>
 
-            <a href="#" class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">
-              {{ $product->name }}
-            </a>
+            <div class="h-12">
+              <a href="#" class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">
+                {{ $product->name }}
+              </a>
+            </div>
             
             <!-- Rating -->
             {{-- <div class="mt-2 flex items-center gap-2">
@@ -77,18 +79,21 @@
             </div> --}}
             
             <!-- Price & Add To Cart -->
-            <!-- Price & Add To Cart -->
-            <div class="pt-3 flex items-end justify-between"> <div> <p class="text-lg font-extrabold leading-tight text-gray-900 dark:text-white">Rp{{ number_format($product->price, 0, ',', '.') }}</p> </div>
-
-            <div>
-              <button type="button" class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-                </svg>
-                Add to cart
-              </button>
-            </div>
-          </div>  
+            <div class="py-2 flex items-end down place-content-evenly flex-row justify-between"> 
+              <div class="flex self-center"> 
+                <p class="text-lg font-extrabold leading-tight text-gray-900 dark:text-white">
+                  Rp{{ number_format($product->price, 0, ',', '.') }}
+                </p> 
+              </div>
+              <div>
+                <button type="button" class="inline-flex items-center rounded-lg bg-primary-700 px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                  <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+                  </svg>
+                  Edit Product
+                </button>
+              </div>
+            </div> 
           </div>
         </div>
       @empty
@@ -100,7 +105,7 @@
         
         <!-- Button -->
         <div class="flex items-center justify-center w-full">
-          <button id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="w-full flex flex-col items-center justify-center h-[25.5rem] border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500" type="button">
+          <button id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="w-full flex flex-col items-center justify-center border-2 min-h-96 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500" type="button">
             <div class="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>

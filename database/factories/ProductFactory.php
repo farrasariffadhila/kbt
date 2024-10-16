@@ -33,7 +33,6 @@ class ProductFactory extends Factory
         $galaxytabSuffixes = [" Ultra - ", " + Wi-Fi - ", " - ", " Wi-Fi - ", " FE+ - "];
         $huaweiSuffixes = [" Pro - ", " Pro WiFi - ", " Air - ", " Papermatte - ",];
         $psSuffixes = [" Slim Edition [Disc Edition]", " Slim Edition [Digital Edition]",];
-        $xboxSuffixes = [" Pro - ", " Pro WiFi - ", " Air - ", " Papermatte - ",];
 
         $productName = match($randomChoice) {
             1 => "Apple iPhone " . rand(12, 15) . $iphoneSuffixes[array_rand($iphoneSuffixes)] . fake()->colorName(), 

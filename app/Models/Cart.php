@@ -11,6 +11,8 @@ class Cart extends Model
     /** @use HasFactory<\Database\Factories\CartsFactory> */
     use HasFactory;
 
+    protected $with = ['user', 'product'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
